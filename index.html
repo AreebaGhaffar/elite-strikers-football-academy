@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+  Elite Strikers Football Academy – One Page Website
+  Fixed-scope delivery per project documentation.
+  Logo, coach profiles, and full contact details are intentional PLACEHOLDERS.
+  Update these after deployment via your chosen platform or CMS; no further development required.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title id="c-meta-title">Elite Strikers Football Academy | Building Tomorrow's Football Champions</title>
+    <meta id="c-meta-description" name="description" content="Elite Strikers Football Academy offers professional football training programs for ages 6-18." />
+    <meta id="c-meta-keywords" name="keywords" content="football academy, soccer training, youth football, Elite Strikers" />
+    <meta name="author" content="Elite Strikers Football Academy" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
+    <header class="site-header" id="home">
+      <div class="container header-inner">
+        <div class="logo" data-editable="logo">
+          <span class="logo-mark" id="c-logo-mark">ES</span>
+          <span class="logo-text">
+            <span class="logo-title" id="c-logo-title">Elite Strikers</span>
+            <span class="logo-subtitle" id="c-logo-subtitle">Football Academy</span>
+          </span>
+        </div>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+
+        <nav class="main-nav">
+          <ul id="c-header-nav"></ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero reveal-on-scroll" aria-labelledby="c-hero-title" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <div class="hero-text">
+            <p class="hero-kicker" id="c-hero-kicker">Elite Strikers Football Academy</p>
+            <h1 id="c-hero-title" aria-labelledby="c-hero-title">Building Tomorrow's Football Champions</h1>
+            <p class="hero-subtitle" id="c-hero-subtitle">
+              World-class coaching, modern facilities, and a winning culture designed to help young players unlock
+              their full potential on and off the pitch.
+            </p>
+            <div class="hero-actions">
+              <a href="#enroll" class="btn btn-primary" id="c-hero-btn-primary">Enroll Now</a>
+              <a href="#programs" class="btn btn-outline" id="c-hero-btn-secondary">View Programs</a>
+            </div>
+            <div class="hero-stats" id="c-hero-stats">
+              <div class="stat">
+                <span class="stat-number" data-target="250">0</span>
+                <span class="stat-label">Players Trained</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="7">0</span>
+                <span class="stat-label">Years of Excellence</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="15">0</span>
+                <span class="stat-label">Certified Coaches</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal-on-scroll" id="about">
+        <div class="container grid-two">
+          <div class="section-text">
+            <h2 id="c-about-title">About Elite Strikers</h2>
+            <p id="c-about-p1">
+              Elite Strikers Football Academy is dedicated to nurturing the next generation of football talent through
+              structured, age-appropriate training programs. Our philosophy blends technical excellence, tactical
+              awareness, and strong character development.
+            </p>
+            <p class="highlight" id="c-about-p2">
+              Our mission is to create a positive, high-performance environment where every player can grow with
+              confidence, discipline, and passion for the beautiful game.
+            </p>
+          </div>
+          <div class="about-highlights" id="c-about-pills"></div>
+        </div>
+      </section>
+
+      <section class="section reveal-on-scroll" id="why-us">
+        <div class="container">
+          <header class="section-header">
+            <h2 id="c-why-title">Why Choose Elite Strikers?</h2>
+            <p id="c-why-intro">
+              We combine elite-level coaching, cutting-edge facilities, and a player-first mindset to deliver an
+              unmatched academy experience.
+            </p>
+          </header>
+          <div class="feature-grid" id="c-why-features"></div>
+        </div>
+      </section>
+
+      <section class="section section-alt reveal-on-scroll" id="programs">
+        <div class="container">
+          <header class="section-header">
+            <h2 id="c-programs-title">Training Programs</h2>
+            <p id="c-programs-intro">
+              Tailored programs designed to support players at every stage of their football journey, from first touch
+              to professional preparation.
+            </p>
+          </header>
+          <div class="card-grid" id="c-programs-cards"></div>
+        </div>
+      </section>
+
+      <section class="section section-alt reveal-on-scroll" id="coaches">
+        <div class="container">
+          <header class="section-header">
+            <h2 id="c-coaches-title">Coaching Staff</h2>
+            <p id="c-coaches-intro">
+              Meet the leaders shaping the next generation of football talent with expertise, passion, and care.
+            </p>
+          </header>
+          <div id="coaches-container" class="coach-grid"></div>
+        </div>
+      </section>
+
+      <section class="section reveal-on-scroll" id="enroll">
+        <div class="container enroll-grid">
+          <div class="section-text">
+            <h2 id="c-enroll-title">Enroll Your Player</h2>
+            <p id="c-enroll-intro">
+              Complete the form to submit an enrollment request. Our team will review your details and contact you with
+              available training slots and next steps.
+            </p>
+            <ul class="enroll-list" id="c-enroll-list"></ul>
+          </div>
+
+          <div class="enroll-form-wrapper">
+            <form id="enrollment-form" class="enroll-form" action="" method="POST" novalidate>
+              <div class="form-row">
+                <label for="player-name" id="c-form-name-label">Player Name</label>
+                <input type="text" id="player-name" name="playerName" required />
+                <small class="field-error" data-for="player-name"></small>
+              </div>
+              <div class="form-row form-row-inline">
+                <div>
+                  <label for="age" id="c-form-age-label">Age</label>
+                  <input type="number" id="age" name="age" min="6" max="18" required />
+                  <small class="field-error" data-for="age"></small>
+                </div>
+                <div>
+                  <label for="phone" id="c-form-phone-label">Phone</label>
+                  <input type="tel" id="phone" name="phone" required />
+                  <small class="field-error" data-for="phone"></small>
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="email" id="c-form-email-label">Email</label>
+                <input type="email" id="email" name="email" required />
+                <small class="field-error" data-for="email"></small>
+              </div>
+              <div class="form-row">
+                <label for="program" id="c-form-program-label">Training Program</label>
+                <select id="program" name="program" required>
+                  <option value="">Select a program</option>
+                </select>
+                <small class="field-error" data-for="program"></small>
+              </div>
+              <fieldset class="form-row">
+                <legend id="c-form-time-legend">Preferred Time</legend>
+                <div class="radio-group" id="c-form-time-options"></div>
+                <small class="field-error" data-for="preferredTime"></small>
+              </fieldset>
+              <div class="form-row">
+                <button type="submit" class="btn btn-primary full-width" id="c-form-submit">Submit Enrollment</button>
+              </div>
+              <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer reveal-on-scroll">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <span class="logo-mark logo-mark-sm" id="c-footer-logo-mark">ES</span>
+          <p id="c-footer-brand">Elite Strikers Football Academy</p>
+          <p class="footer-tagline" id="c-footer-tagline">Building Tomorrow's Football Champions.</p>
+        </div>
+        <div class="footer-contact">
+          <h3 id="c-footer-contact-heading">Contact</h3>
+          <p id="contact-email">Email: <a href="mailto:info@example.com">info@example.com</a></p>
+          <p id="contact-phone">Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+          <p id="contact-location">Location: Elite Strikers Arena, Main City</p>
+        </div>
+        <div class="footer-social">
+          <h3 id="c-footer-social-heading">Follow Us</h3>
+          <ul id="c-footer-social-list"></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> <span id="c-footer-copyright">Elite Strikers Football Academy. All rights reserved.</span></p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">↑</button>
+    <script src="script.js"></script>
+  </body>
+</html>

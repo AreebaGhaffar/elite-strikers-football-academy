@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit entire website – Elite Strikers (client only)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      background: #0f1a17;
+      color: #e5efe9;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .notice {
+      background: rgba(244, 196, 48, 0.15);
+      border: 1px solid rgba(244, 196, 48, 0.4);
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .section {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .section h2 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      color: #f4c430;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .block {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .block h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-remove {
+      background: rgba(200, 80, 80, 0.8);
+      color: #fff;
+    }
+
+    .btn-add {
+      background: #0b3d2e;
+      color: #f4c430;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-save {
+      background: #f4c430;
+      color: #0b3d2e;
+      padding: 0.65rem 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    #gate {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    #editor {
+      display: none;
+    }
+
+    #editor.unlocked {
+      display: block;
+    }
+
+    .save-result {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .save-result.ok {
+      color: #a8f5c2;
+    }
+
+    .save-result.err {
+      color: #ffb6b6;
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="gate">
+    <h1>Edit entire website</h1>
+    <p>This page is for the site owner only. Do not share this link.</p>
+    <label for="admin-password">Password</label>
+    <input type="password" id="admin-password" placeholder="Enter password" autocomplete="off" />
+    <button type="button" class="btn-save" id="btn-unlock" style="margin-top:0.5rem">Continue</button>
+  </div>
+
+  <div id="editor">
+    <h1>Edit all website content</h1>
+    <div class="notice">
+      <strong>Full control</strong>
+      Edit every section from top to bottom. When done, click &quot;Save and download content.json&quot;, then upload
+      the file to your site (same folder as index.html). Do not link to this page from the public site.
+    </div>
+
+    <div class="section">
+      <h2>Page title &amp; SEO</h2>
+      <label>Page title (browser tab)</label>
+      <input type="text" id="meta-pageTitle" />
+      <label>Meta description</label>
+      <textarea id="meta-metaDescription" rows="2"></textarea>
+      <label>Meta keywords (comma-separated)</label>
+      <input type="text" id="meta-metaKeywords" />
+    </div>
+
+    <div class="section">
+      <h2>Header / Logo</h2>
+      <div class="row">
+        <div><label>Logo mark (e.g. ES)</label><input type="text" id="header-logoMark" /></div>
+        <div><label>Logo title</label><input type="text" id="header-logoTitle" /></div>
+      </div>
+      <label>Logo subtitle</label>
+      <input type="text" id="header-logoSubtitle" />
+      <label>Nav links (one per line: Label | #anchor)</label>
+      <textarea id="header-nav" rows="6" placeholder="Home | #home&#10;About | #about"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>Hero section</h2>
+      <label>Kicker line</label>
+      <input type="text" id="hero-kicker" />
+      <label>Main title (tagline)</label>
+      <input type="text" id="hero-title" />
+      <label>Subtitle paragraph</label>
+      <textarea id="hero-subtitle" rows="3"></textarea>
+      <div class="row">
+        <div><label>Primary button text</label><input type="text" id="hero-btnPrimary" /></div>
+        <div><label>Secondary button text</label><input type="text" id="hero-btnSecondary" /></div>
+      </div>
+      <label>Stats (one per line: number,Label)</label>
+      <textarea id="hero-stats" rows="4" placeholder="250,Players Trained"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>About section</h2>
+      <label>Section title</label>
+      <input type="text" id="about-title" />
+      <label>First paragraph</label>
+      <textarea id="about-p1" rows="3"></textarea>
+      <label>Mission / highlight paragraph</label>
+      <textarea id="about-p2" rows="2"></textarea>
+      <label>Pills (one per line)</label>
+      <textarea id="about-pills" rows="5" placeholder="One highlight per line"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>Training programs (4 cards)</h2>
+      <label>Section title</label>
+      <input type="text" id="programs-title" />
+      <label>Intro paragraph</label>
+      <textarea id="programs-intro" rows="2"></textarea>
+      <div id="programs-cards-container"></div>
+    </div>
+
+    <div class="section">
+      <h2>Why choose us (4 features)</h2>
+      <label>Section title</label>
+      <input type="text" id="why-title" />
+      <label>Intro paragraph</label>
+      <textarea id="why-intro" rows="2"></textarea>
+      <div id="why-features-container"></div>
+    </div>
+
+    <div class="section">
+      <h2>Coaching staff</h2>
+      <label>Section title</label>
+      <input type="text" id="coaches-title" />
+      <label>Intro paragraph</label>
+      <textarea id="coaches-intro" rows="2"></textarea>
+      <button type="button" class="btn-add" id="btn-add-coach">+ Add coach</button>
+      <div id="coaches-list"></div>
+    </div>
+
+    <div class="section">
+      <h2>Enroll section</h2>
+      <label>Section title</label>
+      <input type="text" id="enroll-title" />
+      <label>Intro paragraph</label>
+      <textarea id="enroll-intro" rows="2"></textarea>
+      <label>Bullet points (one per line)</label>
+      <textarea id="enroll-listItems" rows="4"></textarea>
+      <h3 style="font-size:0.95rem;margin-top:1rem;">Form labels &amp; options</h3>
+      <div class="row">
+        <div><label>Player name label</label><input type="text" id="form-playerNameLabel" /></div>
+        <div><label>Age label</label><input type="text" id="form-ageLabel" /></div>
+      </div>
+      <div class="row">
+        <div><label>Phone label</label><input type="text" id="form-phoneLabel" /></div>
+        <div><label>Email label</label><input type="text" id="form-emailLabel" /></div>
+      </div>
+      <label>Program dropdown label</label>
+      <input type="text" id="form-programLabel" />
+      <label>Program placeholder (first option)</label>
+      <input type="text" id="form-programPlaceholder" />
+      <label>Program options (one per line: value,Label)</label>
+      <textarea id="form-programOptions" rows="5"
+        placeholder="Youth Development (6-12),Youth Development (Ages 6-12)"></textarea>
+      <label>Preferred time legend</label>
+      <input type="text" id="form-timeLegend" />
+      <label>Time options (one per line: value,Label)</label>
+      <textarea id="form-timeOptions" rows="4" placeholder="Weekday Evenings,Weekday Evenings"></textarea>
+      <label>Submit button text</label>
+      <input type="text" id="form-submitLabel" />
+      <label>Formspree endpoint URL</label>
+      <input type="url" id="formspreeAction" placeholder="https://formspree.io/f/xxxxx" />
+    </div>
+
+    <div class="section">
+      <h2>Footer</h2>
+      <div class="row">
+        <div><label>Logo mark (footer)</label><input type="text" id="footer-logoMark" /></div>
+        <div><label>Brand name</label><input type="text" id="footer-brandName" /></div>
+      </div>
+      <label>Tagline</label>
+      <input type="text" id="footer-tagline" />
+      <label>Contact heading</label>
+      <input type="text" id="footer-contactHeading" />
+      <div class="row">
+        <div><label>Email</label><input type="text" id="footer-email" /></div>
+        <div><label>Phone</label><input type="text" id="footer-phone" /></div>
+      </div>
+      <label>Location</label>
+      <input type="text" id="footer-location" />
+      <label>Social heading</label>
+      <input type="text" id="footer-socialHeading" />
+      <label>Social links (one per line: Label,URL)</label>
+      <textarea id="footer-social" rows="4" placeholder="Facebook,https://facebook.com/yourpage"></textarea>
+      <label>Copyright text</label>
+      <input type="text" id="footer-copyright" />
+    </div>
+
+    <button type="button" class="btn-save" id="btn-save">Save and download content.json</button>
+    <div id="save-result" class="save-result"></div>
+  </div>
+
+  <script>
+    var ADMIN_PASSWORD = "elite2024";
+    var data = {};
+
+    document.getElementById("btn-unlock").onclick = function () {
+      if (document.getElementById("admin-password").value !== ADMIN_PASSWORD) {
+        alert("Incorrect password.");
+        return;
+      }
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("editor").classList.add("unlocked");
+      loadContent();
+    };
+
+    function loadContent() {
+      fetch("content.json").then(function (r) { return r.json(); }).then(function (json) {
+        data = json;
+        fillForm();
+      }).catch(function () {
+        data = getDefaultData();
+        fillForm();
+      });
+    }
+
+    function getDefaultData() {
+      return {
+        meta: { pageTitle: "", metaDescription: "", metaKeywords: "" },
+        header: { logoMark: "ES", logoTitle: "", logoSubtitle: "", nav: [] },
+        hero: { kicker: "", title: "", subtitle: "", btnPrimary: "", btnSecondary: "", stats: [] },
+        about: { title: "", paragraph1: "", paragraph2: "", pills: [] },
+        programs: { title: "", intro: "", cards: [] },
+        whyUs: { title: "", intro: "", features: [] },
+        coaches: { title: "", intro: "", list: [] },
+        enroll: { title: "", intro: "", listItems: [], form: {}, formspreeAction: "" },
+        footer: { logoMark: "ES", brandName: "", tagline: "", contactHeading: "", contact: {}, socialHeading: "", social: [], copyrightText: "" }
+      };
+    }
+
+    function fillForm() {
+      var d = data;
+      if (d.meta) {
+        document.getElementById("meta-pageTitle").value = d.meta.pageTitle || "";
+        document.getElementById("meta-metaDescription").value = d.meta.metaDescription || "";
+        document.getElementById("meta-metaKeywords").value = d.meta.metaKeywords || "";
+      }
+      if (d.header) {
+        document.getElementById("header-logoMark").value = d.header.logoMark || "";
+        document.getElementById("header-logoTitle").value = d.header.logoTitle || "";
+        document.getElementById("header-logoSubtitle").value = d.header.logoSubtitle || "";
+        document.getElementById("header-nav").value = (d.header.nav || []).map(function (n) { return (n.label || "") + " | " + (n.href || ""); }).join("\n");
+      }
+      if (d.hero) {
+        document.getElementById("hero-kicker").value = d.hero.kicker || "";
+        document.getElementById("hero-title").value = d.hero.title || "";
+        document.getElementById("hero-subtitle").value = d.hero.subtitle || "";
+        document.getElementById("hero-btnPrimary").value = d.hero.btnPrimary || "";
+        document.getElementById("hero-btnSecondary").value = d.hero.btnSecondary || "";
+        document.getElementById("hero-stats").value = (d.hero.stats || []).map(function (s) { return (s.value || "") + "," + (s.label || ""); }).join("\n");
+      }
+      if (d.about) {
+        document.getElementById("about-title").value = d.about.title || "";
+        document.getElementById("about-p1").value = d.about.paragraph1 || "";
+        document.getElementById("about-p2").value = d.about.paragraph2 || "";
+        document.getElementById("about-pills").value = (d.about.pills || []).join("\n");
+      }
+      if (d.programs) {
+        document.getElementById("programs-title").value = d.programs.title || "";
+        document.getElementById("programs-intro").value = d.programs.intro || "";
+        renderProgramsCards();
+      }
+      if (d.whyUs) {
+        document.getElementById("why-title").value = d.whyUs.title || "";
+        document.getElementById("why-intro").value = d.whyUs.intro || "";
+        renderWhyFeatures();
+      }
+      if (d.coaches) {
+        document.getElementById("coaches-title").value = d.coaches.title || "";
+        document.getElementById("coaches-intro").value = d.coaches.intro || "";
+        renderCoaches();
+      }
+      if (d.enroll) {
+        document.getElementById("enroll-title").value = d.enroll.title || "";
+        document.getElementById("enroll-intro").value = d.enroll.intro || "";
+        document.getElementById("enroll-listItems").value = (d.enroll.listItems || []).join("\n");
+        var f = d.enroll.form || {};
+        document.getElementById("form-playerNameLabel").value = f.playerNameLabel || "";
+        document.getElementById("form-ageLabel").value = f.ageLabel || "";
+        document.getElementById("form-phoneLabel").value = f.phoneLabel || "";
+        document.getElementById("form-emailLabel").value = f.emailLabel || "";
+        document.getElementById("form-programLabel").value = f.programLabel || "";
+        document.getElementById("form-programPlaceholder").value = f.programPlaceholder || "";
+        document.getElementById("form-programOptions").value = (f.programOptions || []).map(function (o) { return (o.value || "") + "," + (o.label || ""); }).join("\n");
+        document.getElementById("form-timeLegend").value = f.timeLegend || "";
+        document.getElementById("form-timeOptions").value = (f.timeOptions || []).map(function (o) { return (o.value || "") + "," + (o.label || ""); }).join("\n");
+        document.getElementById("form-submitLabel").value = f.submitLabel || "";
+        document.getElementById("formspreeAction").value = d.enroll.formspreeAction || "";
+      }
+      if (d.footer) {
+        document.getElementById("footer-logoMark").value = d.footer.logoMark || "";
+        document.getElementById("footer-brandName").value = d.footer.brandName || "";
+        document.getElementById("footer-tagline").value = d.footer.tagline || "";
+        document.getElementById("footer-contactHeading").value = d.footer.contactHeading || "";
+        document.getElementById("footer-email").value = (d.footer.contact || {}).email || "";
+        document.getElementById("footer-phone").value = (d.footer.contact || {}).phone || "";
+        document.getElementById("footer-location").value = (d.footer.contact || {}).location || "";
+        document.getElementById("footer-socialHeading").value = d.footer.socialHeading || "";
+        document.getElementById("footer-social").value = (d.footer.social || []).map(function (s) { return (s.label || "") + "," + (s.url || ""); }).join("\n");
+        document.getElementById("footer-copyright").value = d.footer.copyrightText || "";
+      }
+    }
+
+    function renderProgramsCards() {
+      var cards = data.programs && data.programs.cards ? data.programs.cards : [];
+      while (cards.length < 4) cards.push({ title: "", description: "", items: ["", "", ""] });
+      var html = "";
+      cards.forEach(function (card, i) {
+        html += "<div class=\"block\" data-card-index=\"" + i + "\"><h3>Card " + (i + 1) + "</h3>";
+        html += "<label>Title</label><input type=\"text\" class=\"card-title\" value=\"" + escapeAttr(card.title) + "\">";
+        html += "<label>Description</label><textarea class=\"card-desc\" rows=\"2\">" + escapeAttr(card.description) + "</textarea>";
+        html += "<label>Bullet points (one per line)</label><textarea class=\"card-items\" rows=\"3\">" + (card.items || []).join("\n") + "</textarea></div>";
+      });
+      document.getElementById("programs-cards-container").innerHTML = html;
+    }
+
+    function renderWhyFeatures() {
+      var features = data.whyUs && data.whyUs.features ? data.whyUs.features : [];
+      while (features.length < 4) features.push({ icon: "", title: "", description: "" });
+      var html = "";
+      features.forEach(function (f, i) {
+        html += "<div class=\"block\" data-feature-index=\"" + i + "\"><h3>Feature " + (i + 1) + "</h3>";
+        html += "<label>Icon (emoji or text)</label><input type=\"text\" class=\"feat-icon\" value=\"" + escapeAttr(f.icon) + "\">";
+        html += "<label>Title</label><input type=\"text\" class=\"feat-title\" value=\"" + escapeAttr(f.title) + "\">";
+        html += "<label>Description</label><textarea class=\"feat-desc\" rows=\"2\">" + escapeAttr(f.description) + "</textarea></div>";
+      });
+      document.getElementById("why-features-container").innerHTML = html;
+    }
+
+    function escapeAttr(s) {
+      return String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function renderCoaches() {
+      var list = data.coaches && data.coaches.list ? data.coaches.list : [];
+      var html = "";
+      list.forEach(function (c, i) {
+        html += "<div class=\"block coach-block\" data-i=\"" + i + "\"><h3>Coach " + (i + 1) + "</h3>";
+        html += "<label>Name</label><input type=\"text\" class=\"coach-name\" value=\"" + escapeAttr(c.name) + "\">";
+        html += "<label>Role</label><input type=\"text\" class=\"coach-role\" value=\"" + escapeAttr(c.role) + "\">";
+        html += "<label>Photo URL</label><input type=\"url\" class=\"coach-photo-url\" value=\"" + escapeAttr(c.photoUrl) + "\">";
+        html += "<label>Bio</label><textarea class=\"coach-bio\">" + escapeAttr(c.bio) + "</textarea>";
+        html += "<button type=\"button\" class=\"btn-remove\" data-i=\"" + i + "\">Remove</button></div>";
+      });
+      document.getElementById("coaches-list").innerHTML = html;
+      document.querySelectorAll(".coach-block .btn-remove").forEach(function (btn) {
+        btn.onclick = function () {
+          var i = parseInt(btn.getAttribute("data-i"), 10);
+          data.coaches.list.splice(i, 1);
+          renderCoaches();
+        };
+      });
+    }
+
+    document.getElementById("btn-add-coach").onclick = function () {
+      data.coaches = data.coaches || { title: "", intro: "", list: [] };
+      data.coaches.list = data.coaches.list || [];
+      data.coaches.list.push({ name: "", role: "", bio: "", photoUrl: "" });
+      renderCoaches();
+    };
+
+    function parseLinePairs(text, separator) {
+      return text.split("\n").filter(function (line) { return line.trim(); }).map(function (line) {
+        var idx = line.indexOf(separator);
+        if (idx < 0) return { a: line.trim(), b: "" };
+        return { a: line.substring(0, idx).trim(), b: line.substring(idx + 1).trim() };
+      });
+    }
+
+    function collectForm() {
+      data.meta = {
+        pageTitle: document.getElementById("meta-pageTitle").value.trim(),
+        metaDescription: document.getElementById("meta-metaDescription").value.trim(),
+        metaKeywords: document.getElementById("meta-metaKeywords").value.trim()
+      };
+      var navLines = document.getElementById("header-nav").value.split("\n").filter(function (l) { return l.trim(); });
+      data.header = {
+        logoMark: document.getElementById("header-logoMark").value.trim(),
+        logoTitle: document.getElementById("header-logoTitle").value.trim(),
+        logoSubtitle: document.getElementById("header-logoSubtitle").value.trim(),
+        nav: navLines.map(function (line) {
+          var i = line.indexOf("|");
+          if (i < 0) return { label: line.trim(), href: "#" };
+          return { label: line.substring(0, i).trim(), href: line.substring(i + 1).trim() || "#" };
+        })
+      };
+      var statsLines = document.getElementById("hero-stats").value.split("\n").filter(function (l) { return l.trim(); });
+      data.hero = {
+        kicker: document.getElementById("hero-kicker").value.trim(),
+        title: document.getElementById("hero-title").value.trim(),
+        subtitle: document.getElementById("hero-subtitle").value.trim(),
+        btnPrimary: document.getElementById("hero-btnPrimary").value.trim(),
+        btnSecondary: document.getElementById("hero-btnSecondary").value.trim(),
+        stats: statsLines.map(function (line) {
+          var i = line.indexOf(",");
+          if (i < 0) return { value: 0, label: line.trim() };
+          return { value: parseInt(line.substring(0, i).trim(), 10) || 0, label: line.substring(i + 1).trim() };
+        })
+      };
+      data.about = {
+        title: document.getElementById("about-title").value.trim(),
+        paragraph1: document.getElementById("about-p1").value.trim(),
+        paragraph2: document.getElementById("about-p2").value.trim(),
+        pills: document.getElementById("about-pills").value.split("\n").map(function (l) { return l.trim(); }).filter(Boolean)
+      };
+      var cardBlocks = document.querySelectorAll("#programs-cards-container .block");
+      data.programs = {
+        title: document.getElementById("programs-title").value.trim(),
+        intro: document.getElementById("programs-intro").value.trim(),
+        cards: Array.prototype.map.call(cardBlocks, function (block) {
+          var titleEl = block.querySelector(".card-title");
+          var descEl = block.querySelector(".card-desc");
+          var itemsEl = block.querySelector(".card-items");
+          return {
+            title: titleEl ? titleEl.value.trim() : "",
+            description: descEl ? descEl.value.trim() : "",
+            items: itemsEl ? itemsEl.value.split("\n").map(function (l) { return l.trim(); }).filter(Boolean) : []
+          };
+        })
+      };
+      var featBlocks = document.querySelectorAll("#why-features-container .block");
+      data.whyUs = {
+        title: document.getElementById("why-title").value.trim(),
+        intro: document.getElementById("why-intro").value.trim(),
+        features: Array.prototype.map.call(featBlocks, function (block) {
+          var iconEl = block.querySelector(".feat-icon");
+          var titleEl = block.querySelector(".feat-title");
+          var descEl = block.querySelector(".feat-desc");
+          return {
+            icon: iconEl ? iconEl.value.trim() : "",
+            title: titleEl ? titleEl.value.trim() : "",
+            description: descEl ? descEl.value.trim() : ""
+          };
+        })
+      };
+      data.coaches = {
+        title: document.getElementById("coaches-title").value.trim(),
+        intro: document.getElementById("coaches-intro").value.trim(),
+        list: []
+      };
+      document.querySelectorAll(".coach-block").forEach(function (block) {
+        var nameEl = block.querySelector(".coach-name");
+        var roleEl = block.querySelector(".coach-role");
+        var photoEl = block.querySelector(".coach-photo-url");
+        var bioEl = block.querySelector(".coach-bio");
+        data.coaches.list.push({
+          name: nameEl ? nameEl.value.trim() : "",
+          role: roleEl ? roleEl.value.trim() : "",
+          photoUrl: photoEl ? photoEl.value.trim() : "",
+          bio: bioEl ? bioEl.value.trim() : ""
+        });
+      });
+      var progOptLines = document.getElementById("form-programOptions").value.split("\n").filter(Boolean);
+      var timeOptLines = document.getElementById("form-timeOptions").value.split("\n").filter(Boolean);
+      data.enroll = {
+        title: document.getElementById("enroll-title").value.trim(),
+        intro: document.getElementById("enroll-intro").value.trim(),
+        listItems: document.getElementById("enroll-listItems").value.split("\n").map(function (l) { return l.trim(); }).filter(Boolean),
+        form: {
+          playerNameLabel: document.getElementById("form-playerNameLabel").value.trim(),
+          ageLabel: document.getElementById("form-ageLabel").value.trim(),
+          phoneLabel: document.getElementById("form-phoneLabel").value.trim(),
+          emailLabel: document.getElementById("form-emailLabel").value.trim(),
+          programLabel: document.getElementById("form-programLabel").value.trim(),
+          programPlaceholder: document.getElementById("form-programPlaceholder").value.trim(),
+          programOptions: progOptLines.map(function (line) {
+            var i = line.indexOf(",");
+            if (i < 0) return { value: line.trim(), label: line.trim() };
+            return { value: line.substring(0, i).trim(), label: line.substring(i + 1).trim() };
+          }),
+          timeLegend: document.getElementById("form-timeLegend").value.trim(),
+          timeOptions: timeOptLines.map(function (line) {
+            var i = line.indexOf(",");
+            if (i < 0) return { value: line.trim(), label: line.trim() };
+            return { value: line.substring(0, i).trim(), label: line.substring(i + 1).trim() };
+          }),
+          submitLabel: document.getElementById("form-submitLabel").value.trim()
+        },
+        formspreeAction: document.getElementById("formspreeAction").value.trim()
+      };
+      var socialLines = document.getElementById("footer-social").value.split("\n").filter(Boolean);
+      data.footer = {
+        logoMark: document.getElementById("footer-logoMark").value.trim(),
+        brandName: document.getElementById("footer-brandName").value.trim(),
+        tagline: document.getElementById("footer-tagline").value.trim(),
+        contactHeading: document.getElementById("footer-contactHeading").value.trim(),
+        contact: {
+          email: document.getElementById("footer-email").value.trim(),
+          phone: document.getElementById("footer-phone").value.trim(),
+          location: document.getElementById("footer-location").value.trim()
+        },
+        socialHeading: document.getElementById("footer-socialHeading").value.trim(),
+        social: socialLines.map(function (line) {
+          var i = line.indexOf(",");
+          if (i < 0) return { label: line.trim(), url: "", ariaLabel: "Visit our " + line.trim() };
+          var label = line.substring(0, i).trim();
+          var url = line.substring(i + 1).trim();
+          return { label: label, url: url, ariaLabel: "Visit our " + label };
+        }),
+        copyrightText: document.getElementById("footer-copyright").value.trim()
+      };
+    }
+
+    document.getElementById("btn-save").onclick = function () {
+      collectForm();
+      var json = JSON.stringify(data, null, 2);
+      var blob = new Blob([json], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "content.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      document.getElementById("save-result").className = "save-result ok";
+      document.getElementById("save-result").textContent = "Downloaded content.json. Upload it to your site (same folder as index.html) to publish your changes.";
+    };
+  </script>
+</body>
+
+</html>

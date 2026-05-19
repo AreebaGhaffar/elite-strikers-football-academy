@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "pageTitle": "Elite Strikers Football Academy | Building Tomorrow's Football Champions",
+    "metaDescription": "Elite Strikers Football Academy offers professional football training programs for ages 6-18, including youth development, goalkeeper training, and fitness & conditioning.",
+    "metaKeywords": "football academy, soccer training, youth football, goalkeeper training, fitness conditioning, Elite Strikers"
+  },
+  "header": {
+    "logoMark": "ES",
+    "logoTitle": "Elite Strik",
+    "logoSubtitle": "Football Academy",
+    "nav": [
+      {
+        "label": "Home",
+        "href": "#home"
+      },
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Programs",
+        "href": "#programs"
+      },
+      {
+        "label": "Coaches",
+        "href": "#coaches"
+      },
+      {
+        "label": "Enroll",
+        "href": "#enroll"
+      }
+    ]
+  },
+  "hero": {
+    "kicker": "Elite Strikers Football Academy",
+    "title": "Building Tomorrow's Football Champions",
+    "subtitle": "World-class coaching, modern facilities, and a winning culture designed to help young players unlock their full potential on and off the pitch.",
+    "btnPrimary": "Enroll Now",
+    "btnSecondary": "View Programs",
+    "stats": [
+      {
+        "value": 250,
+        "label": "Players Trained"
+      },
+      {
+        "value": 7,
+        "label": "Years of Excellence"
+      },
+      {
+        "value": 15,
+        "label": "Certified Coaches"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Elite Strikers",
+    "paragraph1": "Elite Strikers Football Academy is dedicated to nurturing the next generation of football talent through structured, age-appropriate training programs. Our philosophy blends technical excellence, tactical awareness, and strong character development.",
+    "paragraph2": "Our mission is to create a positive, high-performance environment where every player can grow with confidence, discipline, and passion for the beautiful game.",
+    "pills": [
+      "UEFA & AFC-certified coaching staff",
+      "Focus on both skills and sportsmanship",
+      "Safe, supportive, and inclusive environment",
+      "Progress tracking & player reports"
+    ]
+  },
+  "programs": {
+    "title": "Training Programs",
+    "intro": "Tailored programs designed to support players at every stage of their football journey, from first touch to professional preparation.",
+    "cards": [
+      {
+        "title": "Youth Development (Ages 6-12)",
+        "description": "Fun, engaging sessions focused on mastering the fundamentals — dribbling, passing, coordination, and a love for the game.",
+        "items": [
+          "Small group sessions",
+          "Technical skill-building",
+          "Game intelligence through play"
+        ]
+      },
+      {
+        "title": "Professional Training (Ages 13-18)",
+        "description": "High-intensity drills and tactical sessions that mirror professional environments for ambitious young players.",
+        "items": [
+          "Position-specific coaching",
+          "Match analysis & feedback",
+          "Trial & scouting preparation"
+        ]
+      },
+      {
+        "title": "Goalkeeper Training",
+        "description": "Specialist training for keepers focusing on reflexes, positioning, distribution, and leadership from the back.",
+        "items": [
+          "Shot-stopping & handling",
+          "1v1 and aerial dominance",
+          "Footwork & ball distribution"
+        ]
+      },
+      {
+        "title": "Fitness & Conditioning",
+        "description": "Football-specific strength, agility, and endurance training to keep players sharp, resilient, and injury-free.",
+        "items": [
+          "Speed & agility ladders",
+          "Core and strength sessions",
+          "Recovery & mobility work"
+        ]
+      }
+    ]
+  },
+  "whyUs": {
+    "title": "Why Choose Elite Strikers?",
+    "intro": "We combine elite-level coaching, cutting-edge facilities, and a player-first mindset to deliver an unmatched academy experience.",
+    "features": [
+      {
+        "icon": "🏆",
+        "title": "Certified Coaches",
+        "description": "Our coaching team holds top-level certifications and experience at professional and international levels."
+      },
+      {
+        "icon": "🏟️",
+        "title": "Modern Facilities",
+        "description": "Train on high-quality pitches with professional-grade equipment, video analysis tools, and recovery areas."
+      },
+      {
+        "icon": "📈",
+        "title": "Player Development Focus",
+        "description": "We track progress over time, providing individualized feedback and development plans for each player."
+      },
+      {
+        "icon": "🤝",
+        "title": "Family-Oriented Culture",
+        "description": "Transparent communication and regular updates keep parents involved in every step of their child's journey."
+      }
+    ]
+  },
+  "coaches": {
+    "title": "Coaching Staff",
+    "intro": "Meet the leaders shaping the next generation of football talent with expertise, passion, and care.",
+    "list": [
+      {
+        "name": "Coach Daniel Reyes",
+        "role": "Head Coach & Technical Director",
+        "photoUrl": "",
+        "bio": "UEFA A-licensed coach with over 12 years of experience in youth academies across Europe, specializing in attacking football and player development."
+      },
+      {
+        "name": "Coach Aisha Khan",
+        "role": "Player Performance & Conditioning",
+        "photoUrl": "",
+        "bio": "Certified strength and conditioning specialist focused on building strong, fast, and resilient athletes through science-backed training."
+      },
+      {
+        "name": "Coach Marco Silva",
+        "role": "Goalkeeping Specialist",
+        "photoUrl": "",
+        "bio": "Former professional goalkeeper with a proven track record of developing confident, commanding keepers at academy and senior levels."
+      }
+    ]
+  },
+  "enroll": {
+    "title": "Enroll Your Player",
+    "intro": "Complete the form to submit an enrollment request. Our team will review your details and contact you with available training slots and next steps.",
+    "listItems": [
+      "For players between ages 6 and 18",
+      "Flexible weekday and weekend training options",
+      "Scholarships available for exceptional talent"
+    ],
+    "form": {
+      "playerNameLabel": "Player Name",
+      "ageLabel": "Age",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email",
+      "programLabel": "Training Program",
+      "programPlaceholder": "Select a program",
+      "programOptions": [
+        {
+          "value": "Youth Development (6-12)",
+          "label": "Youth Development (Ages 6-12)"
+        },
+        {
+          "value": "Professional Training (13-18)",
+          "label": "Professional Training (Ages 13-18)"
+        },
+        {
+          "value": "Goalkeeper Training",
+          "label": "Goalkeeper Training"
+        },
+        {
+          "value": "Fitness & Conditioning",
+          "label": "Fitness & Conditioning"
+        }
+      ],
+      "timeLegend": "Preferred Time",
+      "timeOptions": [
+        {
+          "value": "Weekday Evenings",
+          "label": "Weekday Evenings"
+        },
+        {
+          "value": "Weekend Mornings",
+          "label": "Weekend Mornings"
+        },
+        {
+          "value": "Flexible",
+          "label": "Flexible"
+        }
+      ],
+      "submitLabel": "Submit Enrollment"
+    },
+    "formspreeAction": ""
+  },
+  "footer": {
+    "logoMark": "ES",
+    "brandName": "Elite Strikers Football Academy",
+    "tagline": "Building Tomorrow's Football Champions.",
+    "contactHeading": "Contact",
+    "contact": {
+      "email": "info@elitestrikersacademy.com",
+      "phone": "+1 (234) 567-890",
+      "location": "Elite Strikers Arena, Main City"
+    },
+    "socialHeading": "Follow Us",
+    "social": [
+      {
+        "label": "Facebook",
+        "url": "https://facebook.com/yourpage",
+        "ariaLabel": "Visit our Facebook"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/yourpage",
+        "ariaLabel": "Visit our Instagram"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/yourpage",
+        "ariaLabel": "Visit our Twitter"
+      }
+    ],
+    "copyrightText": "Elite Strikers Football Academy. All rights reserved."
+  }
+}
